@@ -13,8 +13,3 @@ getProfileFX();
 manualInitRouter(structure);
 
 createRoot(document.getElementById('app')!).render(<Providers />);
-
-// @ts-ignore
-import('./eruda').then(({ default: eruda }) => {
-  // nothing;
-}); //runtime download
