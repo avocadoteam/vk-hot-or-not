@@ -44,11 +44,11 @@ export const RootModal = () => {
       return;
     }
 
-    const hashValue = window.location.hash.split('#').pop() || profileId;
+    const hashValue = Number(window.location.hash.split('#').pop() || profileId);
 
-    if (hashValue) {
-      setProfilesUserId(Number(hashValue));
-      getPublicProfileFX(Number(hashValue));
+    if (hashValue && !isNaN(hashValue)) {
+      setProfilesUserId(hashValue);
+      getPublicProfileFX(hashValue);
     }
   }, []);
 
