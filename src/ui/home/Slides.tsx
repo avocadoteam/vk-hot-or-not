@@ -18,7 +18,8 @@ import { CountdownTimer } from '@ui/slider/Timer';
 import { typography } from '@ui/theme/typography.css';
 import { useDrag } from '@use-gesture/react';
 import { Icon20ReportOutline, Icon28CancelCircleOutline } from '@vkontakte/icons';
-import { IconButton } from '@vkontakte/vkui';
+import { IconButton, ScreenSpinner } from '@vkontakte/vkui';
+import { combine } from 'effector';
 import { useStore } from 'effector-react';
 import Lottie from 'lottie-react';
 import { useEffect, useState } from 'react';
@@ -45,10 +46,12 @@ const from = () => ({
   rotate: 0,
 });
 
+const loadingCombine = combine([viewProfileFX.pending, viewAndRateProfileFX.pending], ([a, b]) => a || b);
+
 export const Slides = () => {
   const profiles = useStore($profiles);
   const { lastItemIds, rating, profileUserId, reportIds, isTimerPlaying } = useStore($profUI);
-
+  const loading = useStore(loadingCombine);
   const [gone] = useState(() => new Set());
   const [currentIndex, setIndex] = useState(0);
   const [pp, setPP] = useState<PublicProfile[]>([]);
@@ -233,7 +236,7 @@ export const Slides = () => {
       </div>
 
       <div className={homeStyles.bottomContainer}>
-        <IconButton className={homeStyles.iconLeft} onClick={() => manualSkip()}>
+        <IconButton className={homeStyles.iconLeft} onClick={() => manualSkip()} disabled={loading}>
           <Icon28CancelCircleOutline width={24} height={24} />
           <p className={typography({ color: 'secondary', variant: 'tertiary' })}>Пропустить</p>
         </IconButton>
@@ -245,11 +248,13 @@ export const Slides = () => {
               setTimerPlaying(false);
               rEvents.setModal(Modals.Report);
             }}
+            disabled={loading}
           >
             <Icon20ReportOutline width={24} height={24} />
           </IconButton>
         ) : null}
       </div>
+      {loading ? <ScreenSpinner /> : null}
     </>
   );
 };

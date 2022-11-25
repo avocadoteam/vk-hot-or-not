@@ -69,7 +69,7 @@ export const NoProfiles = () => {
   return (
     <div className={homeStyles.container}>
       <div className={homeStyles.cardEmpty}>
-        <img src={wrapAsset('/imgs/eyes.png')} crossOrigin="anonymous" />
+        <img src={wrapAsset('/imgs/eyes.png')} crossOrigin="anonymous" height="36px" />
         <p className={typography({ color: 'muted', m: 't', align: 'center', variant: 'body', weight: 'hard' })}>
           Профили закончились
         </p>
