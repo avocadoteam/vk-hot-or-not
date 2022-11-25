@@ -78,7 +78,7 @@ export const Slides = () => {
     } else {
       setPP(profiles);
     }
-  }, [lastItemIds]);
+  }, [profiles]);
 
   const manualSkip = (rate?: boolean) => {
     api.start(index => {
@@ -93,12 +93,12 @@ export const Slides = () => {
       const nextNotVisibelItem = currentIndex + 1;
       if (nextNotVisibelItem !== index || !isGone) return;
       setIndex(nextNotVisibelItem);
-      const prevProfile = profiles[currentIndex];
+      const prevProfile = pp[currentIndex];
       if (prevProfile) {
         setProfUICurrId(prevProfile.vkUserId);
       }
 
-      const profile = profiles[nextNotVisibelItem];
+      const profile = pp[nextNotVisibelItem];
       if (profile) {
         setProfilesUserId(profile.vkUserId);
       }
@@ -111,7 +111,7 @@ export const Slides = () => {
       };
     });
     if (gone.has(currentIndex)) {
-      const profile = profiles[currentIndex];
+      const profile = pp[currentIndex];
       if (rate) {
         viewAndRateProfileFX({
           profileId: profile.vkUserId,
@@ -123,7 +123,7 @@ export const Slides = () => {
         viewProfileFX(profile.vkUserId);
       }
     }
-    const wasItLast = profiles.length - 1 === currentIndex;
+    const wasItLast = pp.length - 1 === currentIndex;
     if (wasItLast) {
       setProfilesFinished();
     }
@@ -141,7 +141,7 @@ export const Slides = () => {
         };
       });
       gone.add(index);
-      const wasItLast = profiles.length - 1 === index;
+      const wasItLast = pp.length - 1 === index;
       if (wasItLast) {
         setProfilesFinished();
       }
@@ -163,8 +163,8 @@ export const Slides = () => {
       const nextNotVisibelItem = index + 1;
       if (nextNotVisibelItem !== i || !isGone) return;
       setIndex(nextNotVisibelItem);
-      const profile = profiles[nextNotVisibelItem];
-      const prevProfile = profiles[index];
+      const profile = pp[nextNotVisibelItem];
+      const prevProfile = pp[index];
       if (prevProfile) {
         setProfUICurrId(prevProfile.vkUserId);
       }
@@ -180,7 +180,7 @@ export const Slides = () => {
       };
     });
     if (gone.has(index)) {
-      const profile = profiles[index];
+      const profile = pp[index];
 
       if (profile) {
         if (isTimerPlaying) {
