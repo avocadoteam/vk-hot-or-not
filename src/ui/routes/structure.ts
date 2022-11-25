@@ -2,13 +2,11 @@ import { R_Structure } from 'src/router/types';
 
 export enum ViewTypes {
   Main = 'main',
-  Welcome = 'welcome',
 }
 export enum MainPanels {
   Home = 'home',
-}
-export enum WelcomePanels {
-  Question = 'question',
+  Settings = 'settings',
+  AllRatings = 'allratings',
 }
 
 export const structure: R_Structure = [
@@ -20,16 +18,22 @@ export const structure: R_Structure = [
         id: MainPanels.Home,
         hash: '/home',
       },
-     
-    ],
-  },
-  {
-    id: ViewTypes.Welcome,
-    panels: [
       {
-        id: WelcomePanels.Question,
-        hash: '/w-q',
+        id: MainPanels.Settings,
+        hash: '/settings',
+      },
+      {
+        id: MainPanels.AllRatings,
+        hash: '/all-ratings',
       },
     ],
   },
 ];
+
+export enum Modals {
+  Welcome = 'welcome',
+  Report = 'report',
+  FileUpload = 'fileupload',
+  UserProfile = 'userprofile',
+  UserСlosedProfile = 'userclosedprofile',
+}

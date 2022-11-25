@@ -1,3 +1,4 @@
+import { getProfileFX } from '@core/api/profile/effects.prof';
 import { getStorageKeys, getUserDataFX } from '@core/config/effects.config';
 import '@core/global-listen';
 import '@core/vk-bridge/init';
@@ -8,11 +9,12 @@ import { manualInitRouter } from './router/manual-init';
 
 getStorageKeys();
 getUserDataFX();
+getProfileFX();
 manualInitRouter(structure);
 
 createRoot(document.getElementById('app')!).render(<Providers />);
 
-// // @ts-ignore
-// import('./eruda').then(({ default: eruda }) => {
-//   // nothing;
-// }); //runtime download
+// @ts-ignore
+import('./eruda').then(({ default: eruda }) => {
+  // nothing;
+}); //runtime download

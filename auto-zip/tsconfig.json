@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "outDir": "dist",
+    "esModuleInterop": true,
+    "lib": [
+      "es6"
+    ],
+    "moduleResolution": "node",
+    "strict": true,
+    "noEmitOnError": true,
+    "noImplicitAny": true,
+    "experimentalDecorators": true, // for typeorm
+    "emitDecoratorMetadata": true // for typeorm
+  },
+  "include": [
+    "./index.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+}

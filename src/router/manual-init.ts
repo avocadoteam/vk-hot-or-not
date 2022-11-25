@@ -5,8 +5,6 @@ import { R_Structure } from './types';
 export const manualInitRouter = routerDomain.createEffect((structure: R_Structure) => {
   try {
     const router = new B_Router(structure);
-    const hash = window.location.hash.slice(1);
-    router.toHash(hash);
     return router;
   } catch (error) {
     throw new Error('Incorrect structure! Check your application structure.');

@@ -1,6 +1,6 @@
 import { objKeys } from '@core/utils';
 import { combine, createStore } from 'effector';
-import { hideToast, showFirstToast } from './effects.uic';
+import { addToastToQueue, hideToast, showFirstToast } from './effects.uic';
 import { produceToasts } from './factories/toasts.f';
 import { UIConfig } from './types';
 
@@ -31,6 +31,19 @@ $uic.on(showFirstToast, state => {
     toasts: {
       ...state.toasts,
       visibleId: (state.toasts.visibleId = objKeys(state.toasts.queue)[0]),
+    },
+  };
+});
+$uic.on(addToastToQueue, (state, { id, toast }) => {
+  const queue = {
+    ...state.toasts.queue,
+    [id]: toast,
+  };
+  return {
+    ...state,
+    toasts: {
+      ...state.toasts,
+      queue,
     },
   };
 });

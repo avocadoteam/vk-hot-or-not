@@ -10,6 +10,10 @@ export type Toast = {
 
 export enum ToastId {
   unknown = 'test',
+  FileUpload = 'file-upload',
+  StoryShare = 'story-share',
+  Notifications = 'notifications',
+  Visibility = 'visibility',
 }
 export type Form = 'location';
 export type ToastsState = {

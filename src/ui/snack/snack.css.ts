@@ -12,7 +12,7 @@ const snackAva = styleVariants({
     background: `${vars.all.warn} !important`,
   },
   info: {
-    background: `${vars.all.purple} !important`,
+    background: `${vars.all.text.muted} !important`,
   },
 });
 

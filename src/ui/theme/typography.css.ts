@@ -4,60 +4,58 @@ import { vars } from './theme.css';
 export const typography = recipe({
   base: {
     fontFamily: vars.fonts.family,
-    color: vars.all.text.normal,
     margin: 0,
   },
   variants: {
     color: {
-      text: {
-        color: vars.palette.black,
+      muted: {
+        color: vars.all.text.muted,
+      },
+      secondary: {
+        color: vars.all.text.secondary,
+      },
+      tertiary: {
+        color: vars.all.text.tertiary,
+      },
+      subhead: {
+        color: vars.all.text.subhead,
+      },
+      primary: {
+        color: vars.all.text.primary,
+      },
+      red: {
+        color: vars.all.primary,
       },
     },
     variant: {
       head: {
+        fontSize: '23px',
+        lineHeight: '22px',
+        fontWeight: 700,
+        letterSpacing: '0.25px',
+      },
+      subHead: {
         fontSize: '20px',
-        lineHeight: '24px',
+        lineHeight: '22px',
         fontWeight: 600,
-      },
-      caption: {
-        fontWeight: 500,
-        fontSize: '1rem',
-        lineHeight: '24px',
-        letterSpacing: '-0.078px',
-      },
-      note: {
-        fontWeight: 400,
-        fontSize: '14px',
-        lineHeight: '16px',
-        letterSpacing: '-0.078px',
-        color: vars.all.text.note,
+        letterSpacing: '0.25px',
       },
       body: {
         fontWeight: 400,
-        fontSize: '15px',
-        lineHeight: '18px',
-        letterSpacing: '-0.01rem',
+        fontSize: '1rem',
+        lineHeight: '22px',
+        letterSpacing: '0.35px',
       },
-      primary: {
+      caption: {
+        fontWeight: 400,
+        fontSize: '1rem',
+        lineHeight: '20px',
+        letterSpacing: '-0.25px',
+      },
+      tertiary: {
         fontWeight: 500,
         fontSize: '15px',
-        lineHeight: '16px',
-        letterSpacing: '-0.078px',
-        color: vars.all.primary,
-      },
-      secondary: {
-        fontWeight: 300,
-        fontSize: '13px',
-        lineHeight: '16px',
-        letterSpacing: '-0.078px',
-        color: vars.all.text.dimmed,
-      },
-      input: {
-        fontWeight: 300,
-        fontSize: '17x',
         lineHeight: '22px',
-        letterSpacing: '-0.408px',
-        color: vars.all.text.input,
       },
     },
     weight: {
@@ -79,6 +77,11 @@ export const typography = recipe({
         textAlign: 'center',
       },
     },
+    self: {
+      left: {
+        alignSelf: 'flex-start',
+      },
+    },
     m: {
       't.5': {
         marginTop: '.5rem',
@@ -98,8 +101,14 @@ export const typography = recipe({
       l: {
         marginLeft: '1rem',
       },
+      r: {
+        marginRight: '1rem',
+      },
       'l.5': {
         marginLeft: '.5rem',
+      },
+      ta: {
+        marginTop: 'auto',
       },
     },
     truncate: {

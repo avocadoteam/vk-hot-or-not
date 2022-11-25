@@ -1,6 +1,7 @@
+import { getPublicProfileFX, setProfilesUserId } from '@core/api/profile/effects.prof';
 import { setAppearance, setOnline } from '@core/config';
 import { colors } from '@ui/theme/palette';
-import { DefaultUpdateConfigData } from '@vkontakte/vk-bridge';
+import { ChangeFragmentResponse, DefaultUpdateConfigData } from '@vkontakte/vk-bridge';
 import { vkBridge } from './instance';
 
 // set client theme
@@ -22,6 +23,16 @@ vkBridge.subscribe(({ detail: { type, data } }) => {
     if (window.navigator.onLine) {
       setOnline();
     }
+  }
+
+  if (type === 'VKWebAppChangeFragment') {
+    const hashValue = Number((data as ChangeFragmentResponse).location);
+    if (isNaN(hashValue)) {
+      return;
+    }
+
+    setProfilesUserId(hashValue);
+    getPublicProfileFX(hashValue);
   }
 });
 

@@ -1,5 +1,5 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://showtime.app-dich.com/api/hot-or-not';
-
-export const AX = axios;
+export const AX = axios.create({
+  baseURL: 'https://showtime.app-dich.com/api',
+});

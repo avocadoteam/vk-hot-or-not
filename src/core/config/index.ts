@@ -1,9 +1,12 @@
-import { isDev } from '@core/constants';
+import { getUserFriendsFX } from '@core/api/friends/effects.config';
+import { enableEffector } from '@core/constants';
+import { getSearchParams } from '@core/data/searchParams';
 import { AppearanceType, UserInfo } from '@vkontakte/vk-bridge';
+import { forward } from 'effector';
 import { appConfigDomain } from './domain';
-import { getStorageKeys, getUserDataFX } from './effects.config';
+import { finishWelcomeFX, getStorageKeys, getUserDataFX } from './effects.config';
 
-if (isDev) {
+if (enableEffector) {
   import('effector-logger/attach').then(({ attachLogger }) => {
     attachLogger(appConfigDomain, {
       console: 'enabled',
@@ -17,22 +20,30 @@ export type ConfigType = {
   onlineHandleActivate: boolean;
   user: UserInfo | null;
   sawWelcome: boolean;
+  secondVisit: boolean;
+  hasFriends: boolean;
+  skipFriends: boolean;
 };
 
 export const setAppearance = appConfigDomain.createEvent<AppearanceType>();
 export const setOnline = appConfigDomain.createEvent();
 export const setOffline = appConfigDomain.createEvent();
 export const onlineHandleActivate = appConfigDomain.createEvent();
+export const setFriendsAllowed = appConfigDomain.createEvent();
+export const setFriendsSkip = appConfigDomain.createEvent();
 
-export const $configStore = appConfigDomain.createStore<ConfigType>({
+export const $config = appConfigDomain.createStore<ConfigType>({
   appearance: 'light',
   online: true,
   onlineHandleActivate: true,
   user: null,
   sawWelcome: false,
+  secondVisit: false,
+  hasFriends: !!getSearchParams().get('vk_access_token_settings')?.includes('friends'),
+  skipFriends: false,
 });
 
-$configStore
+$config
   .on(setAppearance, (state, appearance) => ({
     ...state,
     appearance,
@@ -50,13 +61,31 @@ $configStore
     ...state,
     online: true,
     onlineHandleActivate: true,
+  }))
+  .on(setFriendsAllowed, state => ({
+    ...state,
+    hasFriends: true,
+  }))
+  .on(setFriendsSkip, state => ({
+    ...state,
+    skipFriends: true,
   }));
 
-$configStore.on(getUserDataFX.doneData, (state, user) => ({
+$config.on(getUserDataFX.doneData, (state, user) => ({
   ...state,
   user,
 }));
-$configStore.on(getStorageKeys.doneData, (state, { sawWelcome }) => ({
+$config.on(getStorageKeys.doneData, (state, { sawWelcome, secondVisit }) => ({
   ...state,
   sawWelcome,
+  secondVisit,
 }));
+$config.on(finishWelcomeFX.done, state => ({
+  ...state,
+  sawWelcome: true,
+}));
+
+forward({
+  from: getUserFriendsFX.doneData,
+  to: setFriendsAllowed,
+});

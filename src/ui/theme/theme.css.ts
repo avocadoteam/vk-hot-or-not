@@ -10,6 +10,8 @@ const root = createGlobalTheme('#app', {
   fonts: {
     family: `SF Pro Rounded`,
   },
+  boxShadow: '0px 52px 64px rgba(0, 0, 0, 0.03)',
+  borderRadius: '36px',
   palette: {
     white: '#ffffff',
     black: '#000000',
@@ -19,70 +21,55 @@ const root = createGlobalTheme('#app', {
 const elemnetsContract = createThemeContract({
   primary: null,
   secondary: null,
+  btnSecondary: null,
   warn: null,
   error: null,
   background: null,
-  varBackground: null,
-  varBtnBackground: null,
   cardBackground: null,
-  border: null,
-  input: null,
-  boxShadow: null,
-  hr: null,
-  purple: null,
+  cardBackgroundEmpty: null,
+
   text: {
-    input: null,
-    action: null,
-    normal: null,
-    note: null,
-    dimmed: null,
+    primary: null,
+    muted: null,
+    secondary: null,
+    tertiary: null,
+    subhead: null,
   },
 });
 
 export const lightTheme = createTheme(elemnetsContract, {
-  primary: '#2688EB',
-  secondary: '#99A2AD',
+  primary: '#FF2E00',
+  secondary: '#F4F4F4',
+  btnSecondary: 'rgba(255, 92, 0, 0.07)',
   warn: '#FCA743',
   error: '#FF726E',
-  purple: '#3E4BC8',
-  background: '#F5F5F5',
+  background: '#FAFAFA',
   cardBackground: '#FFFFFF',
-  varBackground: 'linear-gradient(180deg, rgba(195,253,169,1) 0%, rgba(154,238,235,1) 70%)',
-  varBtnBackground: '#FFFFFF',
-  border: '1px solid #D3D9DE',
-  input: '#EBEDF0',
-  boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.08), 0px 2px 24px rgba(0, 0, 0, 0.08)',
-  hr: '#D7D8D9',
-
+  cardBackgroundEmpty: '#EBEDF0',
   text: {
-    input: '#818C99',
-    action: '#5C9CE6',
-    normal: '#000000',
-    note: '#454647',
-    dimmed: '#7F8285',
+    primary: '#2C2D2E',
+    muted: '#2C2D2E',
+    secondary: '#818C99',
+    tertiary: '#99A2AD',
+    subhead: '#6D7885',
   },
 });
 
 export const darkTheme = createTheme(elemnetsContract, {
-  primary: '#2688EB',
-  secondary: '#F472B6',
+  primary: '#FF2E00',
+  secondary: '#252525',
+  btnSecondary: 'rgba(255, 92, 0, 0.07)',
+  cardBackgroundEmpty: '#3E3E3E',
   warn: '#E9A658',
   error: '#FF726E',
-  purple: '#8465FF',
-  background: '#1F1D1C',
-  cardBackground: '#333333',
-  varBackground: '#636363',
-  varBtnBackground: '#636363',
-  border: '1px solid #D3D9DE',
-  input: '#EBEDF0',
-  boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.08), 0px 2px 24px rgba(0, 0, 0, 0.08)',
-  hr: '#D7D8D9',
+  background: '#141414',
+  cardBackground: '#2C2D2E',
   text: {
-    input: '#818C99',
-    action: '#5C9CE6',
-    normal: '#FFFFFF',
-    note: '#FFFFFF',
-    dimmed: '#BFBFBF',
+    primary: '#E1E3E6',
+    muted: '#C4C8CC',
+    secondary: '#76787A',
+    tertiary: '#99A2AD',
+    subhead: '#909499',
   },
 });
 
@@ -102,6 +89,9 @@ globalStyle(`.vkui__root`, {
   '--background_content': vars.all.background,
   '--header_background': vars.all.background,
   '--button_primary_background': vars.all.primary,
+  '--button_seondary_background': vars.all.secondary,
+  '--button_secondary_foreground': vars.all.text.secondary,
+  '--vkui--size_border_radius--regular': '1rem',
   '--accent': vars.all.primary,
 } as any);
 globalStyle(`.vkuiSearch`, {
@@ -139,15 +129,25 @@ export const contentCenter = recipe({
   },
 });
 
-export const textAction = style({
-  color: `${vars.all.text.action} !important`,
-});
 export const primary = style({
   color: `${vars.all.primary} !important`,
 });
 export const error = style({
   color: `${vars.all.error} !important`,
 });
-export const dimmed = style({
-  color: `${vars.all.text.dimmed} !important`,
+export const textSecondary = style({
+  color: `${vars.all.text.secondary} !important`,
+});
+
+export const mt2 = style({
+  marginTop: '2rem !important',
+});
+export const mthalf = style({
+  marginTop: '.5rem !important',
+});
+
+export const btnSec = style({
+  backgroundColor: `${vars.all.btnSecondary} !important`,
+  color: `${vars.all.primary} !important`,
+  borderRadius: '1rem !important',
 });

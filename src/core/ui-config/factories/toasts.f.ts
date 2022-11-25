@@ -3,13 +3,15 @@ import { Effect, Store } from 'effector';
 import { codeErrorToToast, successToToast } from '../shapes';
 import { Form, ToastId, UIConfig } from '../types';
 
-const toastFactory: Record<
-  ToastId,
-  {
-    toastForm?: Form;
-    toastText?: string;
-    apis: Effect<any, any, any>[];
-  }
+const toastFactory: Partial<
+  Record<
+    ToastId,
+    {
+      toastForm?: Form;
+      toastText?: string;
+      apis: Effect<any, any, any>[];
+    }
+  >
 > = {
   [ToastId.unknown]: {
     apis: [],
@@ -18,7 +20,7 @@ const toastFactory: Record<
 
 export const produceToasts = (uiS: Store<UIConfig>) => {
   for (const toastId of objKeys(toastFactory)) {
-    toastFactory[toastId].apis.forEach(api => {
+    toastFactory[toastId]?.apis.forEach(api => {
       uiS.on(api.doneData, (state, data) => {
         return {
           ...state,
@@ -26,7 +28,7 @@ export const produceToasts = (uiS: Store<UIConfig>) => {
             ...state.toasts,
             queue: {
               ...state.toasts.queue,
-              [toastId]: successToToast(toastFactory[toastId].toastForm, data),
+              [toastId]: successToToast(toastFactory[toastId]?.toastForm, data),
             },
           },
         };
@@ -38,7 +40,7 @@ export const produceToasts = (uiS: Store<UIConfig>) => {
           queue: {
             ...state.toasts.queue,
             [toastId]: {
-              ...codeErrorToToast(toastFactory[toastId].toastForm, toastFactory[toastId].toastText, data),
+              ...codeErrorToToast(toastFactory[toastId]?.toastForm, toastFactory[toastId]?.toastText, data),
               type: 'error',
             },
           },

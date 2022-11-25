@@ -33,3 +33,7 @@ const onlyRuLetters = /[^(а-яА-я|ёЁ|\-) ]/g;
 export const shapeTextSearch = (v: string) => {
   return v.replace(onlyRuLetters, '').trimStart();
 };
+
+export const isODR = () => window.location.href.includes('file://');
+
+export const wrapAsset = (src: string) => `https://avocadoteam.github.io/vk-hot-or-not${src}`;

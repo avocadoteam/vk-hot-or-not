@@ -1,10 +1,8 @@
 export const colors = {
   dark: {
-    bg: '#1F1D1C',
-    bgCard: '#636363',
+    bg: '#141414',
   },
   light: {
-    bg: '#F5F5F5',
-    bgCard: '#c3fda9',
+    bg: '#FAFAFA',
   },
 };
