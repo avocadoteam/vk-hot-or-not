@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/vk-hot-or-not/sw.js', { scope: '/vk-hot-or-not/' })})}
