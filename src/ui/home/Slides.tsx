@@ -1,7 +1,6 @@
 import {
   setProfilesFinished,
   setProfilesUserId,
-  setProfRating,
   setProfUICurrId,
   setTimerCD,
   setTimerPlaying,
@@ -12,8 +11,6 @@ import { $profiles, $profUI } from '@core/api/profile/store.prof';
 import { PublicProfile } from '@core/types/profile';
 import { animated, to as animate, useSprings } from '@react-spring/web';
 import { Modals } from '@ui/routes/structure';
-import { CoolSlider } from '@ui/slider/CoolSlider';
-import { sliderStyles } from '@ui/slider/slider.css';
 import { CountdownTimer } from '@ui/slider/Timer';
 import { typography } from '@ui/theme/typography.css';
 import { useDrag } from '@use-gesture/react';
@@ -21,12 +18,11 @@ import { Icon20ReportOutline, Icon28CancelCircleOutline } from '@vkontakte/icons
 import { IconButton, ScreenSpinner } from '@vkontakte/vkui';
 import { combine } from 'effector';
 import { useStore } from 'effector-react';
-import Lottie from 'lottie-react';
 import { useEffect, useState } from 'react';
 import { rEvents } from 'src/router/events';
 import { CardContent } from './CardContent';
 import { homeStyles } from './home.css';
-import swipeAnimation from './swipe.json';
+import { SlideRate } from './SlideRate';
 
 const to = (i: number) => ({
   x: 0,
@@ -221,19 +217,7 @@ export const Slides = () => {
       </div>
       <p className={typography({ color: 'tertiary', m: 't1.5', align: 'center', variant: 'tertiary' })}>Оцените профиль:</p>
 
-      <div className={sliderStyles.slider}>
-        <CoolSlider
-          onChangeCb={v => {
-            setTimerPlaying(false);
-            setProfRating(v);
-          }}
-          value={rating * 10}
-          onChangeCommitted={() => setTimerPlaying(true)}
-        />
-        {currentIndex === 0 && !lastItemIds.length && rating === 5 ? (
-          <Lottie animationData={swipeAnimation} loop className={homeStyles.swipeAnim} />
-        ) : null}
-      </div>
+      <SlideRate currentIndex={currentIndex} />
 
       <div className={homeStyles.bottomContainer}>
         <IconButton className={homeStyles.iconLeft} onClick={() => manualSkip()} disabled={loading}>
