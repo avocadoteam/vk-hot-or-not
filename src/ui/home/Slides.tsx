@@ -106,6 +106,7 @@ export const Slides = () => {
         delay: 350,
       };
     });
+
     if (gone.has(currentIndex)) {
       const profile = pp[currentIndex];
       if (rate) {
@@ -114,11 +115,12 @@ export const Slides = () => {
           rating,
         });
       } else {
-        setTimerPlaying(false);
-        setTimerCD(3000);
         viewProfileFX(profile.vkUserId);
       }
     }
+    setTimerPlaying(false);
+    setTimerCD(3000);
+
     const wasItLast = pp.length - 1 === currentIndex;
     if (wasItLast) {
       setProfilesFinished();
@@ -185,12 +187,12 @@ export const Slides = () => {
             rating,
           });
         } else {
-          setTimerCD(3000);
           viewProfileFX(profile.vkUserId);
         }
       }
-      setTimerPlaying(false);
     }
+    setTimerPlaying(false);
+    setTimerCD(3000);
   });
 
   return (
