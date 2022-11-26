@@ -44,7 +44,7 @@ export const RootModal = () => {
       return;
     }
 
-    const hashValue = Number(window.location.hash.split('#').pop() || profileId);
+    const hashValue = Number(!!profileId ? profileId : window.location.hash.split('#').pop());
 
     if (hashValue && !isNaN(hashValue)) {
       setProfilesUserId(hashValue);
