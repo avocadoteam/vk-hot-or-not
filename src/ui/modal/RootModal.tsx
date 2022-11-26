@@ -44,7 +44,7 @@ export const RootModal = () => {
       return;
     }
 
-    const hashValue = Number(window.location.hash.split('#').pop() || profileId);
+    const hashValue = profileId ? Number(profileId) : Number(window.location.hash.split('#').pop());
 
     if (hashValue && !isNaN(hashValue)) {
       setProfilesUserId(hashValue);
@@ -90,6 +90,28 @@ export const RootModal = () => {
       setTimerPlaying(true);
     }
   }, [publicInfo, profileUserId, countdown]);
+
+  useEffect(() => {
+    const back = () => {
+      switch (modal) {
+        case Modals.UserProfile:
+          closeProfile();
+          break;
+        case Modals.Welcome:
+          closeWelcome();
+          break;
+        case Modals.Report:
+          closeReport();
+          break;
+
+        default:
+          closeModal();
+          break;
+      }
+    };
+    window.addEventListener('popstate', back);
+    return () => window.removeEventListener('popstate', back);
+  }, [modal, closeProfile, closeReport]);
 
   return (
     <ModalRoot activeModal={modal}>

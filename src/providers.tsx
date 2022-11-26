@@ -3,7 +3,6 @@ import { ErrorBoundary } from '@ui/error-bound';
 import { AdaptivityProvider, ConfigProvider } from '@vkontakte/vkui';
 import { useStore } from 'effector-react';
 import { App } from './app';
-import { RouterProvider } from './router/RouterProvider';
 
 export const Providers = () => {
   const { appearance } = useStore($config);
@@ -11,9 +10,7 @@ export const Providers = () => {
     <ConfigProvider appearance={appearance}>
       <AdaptivityProvider>
         <ErrorBoundary>
-          <RouterProvider>
-            <App />
-          </RouterProvider>
+          <App />
         </ErrorBoundary>
       </AdaptivityProvider>
     </ConfigProvider>
