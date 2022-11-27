@@ -36,7 +36,7 @@ export const RootModal = () => {
   const platform = usePlatform();
 
   useEffect(() => {
-    const profileId = getSearchParams().get('vk_profile_id') ?? 0;
+    const profileId = getSearchParams().get('vk_profile_id') ?? 263625908;
     const myId = getSearchParams().get('vk_user_id') ?? 0;
 
     if (Number(profileId) === Number(myId)) {

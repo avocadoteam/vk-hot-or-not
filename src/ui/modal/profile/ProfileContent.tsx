@@ -9,9 +9,9 @@ import {
 } from '@core/api/profile/effects.prof';
 import { $profUI, $publicProfile } from '@core/api/profile/store.prof';
 import { getSearchParams } from '@core/data/searchParams';
-import { CardContent } from '@ui/home/CardContent';
 import { homeStyles } from '@ui/home/home.css';
-import swipeAnimation from '@ui/home/swipe.json';
+import { CardContent } from '@ui/home/rating/CardContent';
+import swipeAnimation from '@ui/home/rating/swipe.json';
 import { Modals } from '@ui/routes/structure';
 import { sgsStyles } from '@ui/settings/sgs.css';
 import { CoolSlider, valueToImgPath } from '@ui/slider/CoolSlider';

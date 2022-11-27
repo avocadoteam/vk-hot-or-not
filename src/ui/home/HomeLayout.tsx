@@ -14,7 +14,7 @@ import { useEffect } from 'react';
 import { FriendsRequest } from './FriendsRequest';
 import { homeStyles } from './home.css';
 import { NoProfiles } from './NoProfiles';
-import { Slides } from './Slides';
+import { Slides } from './rating/Slides';
 dayjs.locale('ru');
 
 const loadingCombine = combine([getProfileFX.pending, getPublicProfilesFX.pending], ([a, b]) => a || b);

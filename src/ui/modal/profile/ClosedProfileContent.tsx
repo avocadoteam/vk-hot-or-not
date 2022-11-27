@@ -1,5 +1,6 @@
 import { setProfilesUserId } from '@core/api/profile/effects.prof';
 import { $publicProfile } from '@core/api/profile/store.prof';
+import { wrapAsset } from '@core/utils';
 import { homeStyles } from '@ui/home/home.css';
 import { mt2, mthalf } from '@ui/theme/theme.css';
 import { typography } from '@ui/theme/typography.css';
@@ -14,7 +15,7 @@ export const ClosedProfileContent = () => {
     <div className={homeStyles.container}>
       <div className={homeStyles.card}>
         <div className={homeStyles.cardBgEmpty} />
-        <div className={homeStyles.cardFgEmpty} />
+        <img className={homeStyles.cardFgEmpty} src={wrapAsset('/imgs/temp_fg.png')} />
       </div>
 
       <p className={typography({ color: 'muted', variant: 'subHead', align: 'center', m: 't3' })}>Начни оценивать друзей</p>

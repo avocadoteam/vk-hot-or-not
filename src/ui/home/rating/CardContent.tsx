@@ -1,6 +1,6 @@
 import { PublicProfile } from '@core/types/profile';
 import { typography } from '@ui/theme/typography.css';
-import { homeStyles } from './home.css';
+import { homeStyles } from '../home.css';
 
 type Props = {
   profile: PublicProfile;

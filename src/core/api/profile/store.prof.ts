@@ -1,6 +1,6 @@
 import { ProfileData, PublicInfo, PublicProfile } from '@core/types/profile';
 import { Rating } from '@core/types/rating';
-import { forward } from 'effector';
+import { combine, forward } from 'effector';
 import { getUserFriendsFX } from '../friends/effects.config';
 import { profD } from './domain.prof';
 import {
@@ -18,6 +18,8 @@ import {
   setProfUICurrId,
   setTimerCD,
   setTimerPlaying,
+  viewAndRateProfileFX,
+  viewProfileFX,
 } from './effects.prof';
 
 type ProfileState = {
@@ -126,3 +128,5 @@ $profUI.on(getPublicProfilesFX.doneData, (state, data) => ({
   noProfiles: !data.length,
 }));
 $publicProfile.on(getPublicProfileFX.doneData, (state, data) => data);
+
+export const loadingRate = combine([viewProfileFX.pending, viewAndRateProfileFX.pending], ([a, b]) => a || b);

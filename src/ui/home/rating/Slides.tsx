@@ -7,7 +7,7 @@ import {
   viewAndRateProfileFX,
   viewProfileFX,
 } from '@core/api/profile/effects.prof';
-import { $profiles, $profUI } from '@core/api/profile/store.prof';
+import { $profiles, $profUI, loadingRate } from '@core/api/profile/store.prof';
 import { PublicProfile } from '@core/types/profile';
 import { animated, to as animate, useSprings } from '@react-spring/web';
 import { Modals } from '@ui/routes/structure';
@@ -15,14 +15,14 @@ import { CountdownTimer } from '@ui/slider/Timer';
 import { typography } from '@ui/theme/typography.css';
 import { useDrag } from '@use-gesture/react';
 import { Icon20ReportOutline, Icon28CancelCircleOutline } from '@vkontakte/icons';
-import { IconButton, ScreenSpinner } from '@vkontakte/vkui';
-import { combine } from 'effector';
+import { IconButton } from '@vkontakte/vkui';
 import { useStore } from 'effector-react';
 import { useEffect, useState } from 'react';
 import { rEvents } from 'src/router/events';
+import { homeStyles } from '../home.css';
 import { CardContent } from './CardContent';
-import { homeStyles } from './home.css';
 import { SlideRate } from './SlideRate';
+import { Spinner } from './Spinner';
 
 const to = (i: number) => ({
   x: 0,
@@ -42,12 +42,10 @@ const from = () => ({
   rotate: 0,
 });
 
-const loadingCombine = combine([viewProfileFX.pending, viewAndRateProfileFX.pending], ([a, b]) => a || b);
-
 export const Slides = () => {
   const profiles = useStore($profiles);
   const { lastItemIds, rating, profileUserId, reportIds, isTimerPlaying } = useStore($profUI);
-  const loading = useStore(loadingCombine);
+  const loading = useStore(loadingRate);
   const [gone] = useState(() => new Set());
   const [currentIndex, setIndex] = useState(0);
   const [pp, setPP] = useState<PublicProfile[]>([]);
@@ -240,7 +238,7 @@ export const Slides = () => {
           </IconButton>
         ) : null}
       </div>
-      {loading ? <ScreenSpinner /> : null}
+      <Spinner />
     </>
   );
 };
