@@ -1,6 +1,8 @@
-import { getProfileFX } from '@core/api/profile/effects.prof';
+import { getUserTokenFX } from '@core/api/friends/effects.config';
+import { getProfileFX, getPublicProfilesFX } from '@core/api/profile/effects.prof';
 import { $config, onlineHandleActivate } from '@core/config';
 import { getUserDataFX } from '@core/config/effects.config';
+import { isDev } from '@core/constants';
 import { Div, Group, Panel, PanelHeader, Spinner, Text, Title, View } from '@vkontakte/vkui';
 import { useStore } from 'effector-react';
 import React from 'react';
@@ -8,7 +10,7 @@ import { AlienOffline } from 'src/assets/svg/AlienOffline';
 import { off_alien, off_container, off_div, off_g, off_mt } from './style.css';
 
 export const Offline = React.memo(() => {
-  const { online } = useStore($config);
+  const { online, hasFriends } = useStore($config);
 
   React.useEffect(() => {
     if (online) {
@@ -17,6 +19,11 @@ export const Offline = React.memo(() => {
         onlineHandleActivate();
         getUserDataFX();
         getProfileFX();
+        if (hasFriends && !isDev) {
+          getUserTokenFX();
+        } else {
+          getPublicProfilesFX([]);
+        }
       }, 1200);
     }
   }, [online]);
