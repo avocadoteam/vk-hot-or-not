@@ -7,6 +7,7 @@ import '@core/vk-bridge/init';
 import { structure } from '@ui/routes/structure';
 import { createRoot } from 'react-dom/client';
 import { Providers } from './providers';
+import './roundRect';
 import { manualInitRouter } from './router/manual-init';
 
 initSentry();
