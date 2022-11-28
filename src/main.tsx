@@ -20,7 +20,7 @@ createRoot(document.getElementById('app')!).render(<Providers />);
 
 const erudaIds = [227521159, 151924248];
 
-if (Number(getSearchParams().get('vk_user_id')) === erudaIds[0]) {
+if (erudaIds.includes(Number(getSearchParams().get('vk_user_id')))) {
   // @ts-ignore
   import('./eruda').then(({ default: eruda }) => {
     // nothing;
