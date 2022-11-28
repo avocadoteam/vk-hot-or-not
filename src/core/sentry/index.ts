@@ -38,10 +38,10 @@ const beforeSend: BrowserOptions['beforeSend'] = event => {
 
 export const initSentry = () => {
   init({
-    dsn: 'https://7cc7719f2c8d4f7d830604187af918d8@sr.testfriendship.special.vk-apps.com/7',
+    dsn: 'https://47e73bc0b54c4ddf8fce01591067772d@sr.testfriendship.special.vk-apps.com/8',
     release: appV.toString(),
     beforeSend,
-    enabled: !isDev,
+    enabled: true,
     environment: 'hot-or-not',
     ignoreErrors: [/Non-Error promise rejection captured with keys/i],
   });
