@@ -1,3 +1,4 @@
+import { $config } from '@core/config';
 import { appV, isDev } from '@core/constants';
 import { BrowserOptions, captureEvent, init, Request } from '@sentry/browser';
 
@@ -15,6 +16,15 @@ export const captureUrlEvent = (message: string, request: Request = {}) => {
 const beforeSend: BrowserOptions['beforeSend'] = event => {
   if (!event.message || event.message?.indexOf('ChunkLoadError') !== -1) {
     return null;
+  }
+
+  const u = $config.getState().user;
+
+  if (u) {
+    event.user = {
+      id: String(u.id),
+      username: `${u.first_name} ${u.last_name}`,
+    };
   }
 
   event.extra = {
