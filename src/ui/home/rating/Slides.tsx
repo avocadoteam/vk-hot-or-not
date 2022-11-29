@@ -188,9 +188,9 @@ export const Slides = () => {
           viewProfileFX(profile.vkUserId);
         }
       }
+      setTimerPlaying(false);
+      setTimerCD(3000);
     }
-    setTimerPlaying(false);
-    setTimerCD(3000);
   });
 
   return (
