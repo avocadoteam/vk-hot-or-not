@@ -1,6 +1,5 @@
 import { getProfileFX } from '@core/api/profile/effects.prof';
 import { getStorageKeys, getUserDataFX } from '@core/config/effects.config';
-import { getSearchParams } from '@core/data/searchParams';
 import '@core/global-listen';
 import { initSentry } from '@core/sentry';
 import '@core/vk-bridge/init';
@@ -17,12 +16,3 @@ getProfileFX();
 manualInitRouter(structure);
 
 createRoot(document.getElementById('app')!).render(<Providers />);
-
-const erudaIds = [227521159, 151924248];
-
-if (erudaIds.includes(Number(getSearchParams().get('vk_user_id')))) {
-  // @ts-ignore
-  import('./eruda').then(({ default: eruda }) => {
-    // nothing;
-  }); //runtime download
-}

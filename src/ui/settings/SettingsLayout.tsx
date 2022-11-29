@@ -1,13 +1,13 @@
 import { getProfileFX, saveProfileFX } from '@core/api/profile/effects.prof';
 import { $profile } from '@core/api/profile/store.prof';
 import { $config } from '@core/config';
+import { enableEffector } from '@core/constants';
 import { useProfileBtn } from '@core/hooks/useProfileBtn';
 import { useStoryShare } from '@core/hooks/useStoryShare';
 import { HotListType } from '@core/types/profile';
 import { addToastToQueue, hideToast } from '@core/ui-config/effects.uic';
 import { ToastId } from '@core/ui-config/types';
 import { openLink } from '@core/utils';
-import { resetWelcome } from '@core/vk-bridge/user';
 import { MainPanels, Modals } from '@ui/routes/structure';
 import { valueToImgPath } from '@ui/slider/CoolSlider';
 import { btnSec, textSecondary } from '@ui/theme/theme.css';
@@ -155,7 +155,7 @@ export const SettingsLayout = () => {
             Поделиться счётом
           </Button>
         </div>
-        {canAddToProfile ? (
+        {canAddToProfile && enableEffector ? (
           <Button
             onClick={addedToProfile ? removeBtnFromProfile : addBtnToProfile}
             size="l"
@@ -166,9 +166,6 @@ export const SettingsLayout = () => {
             Добавить кнопку в профиль
           </Button>
         ) : null}
-        <Button onClick={resetWelcome} size="l" stretched className={btnSec} style={{ margin: '1rem 0' }}>
-          Сбросить onboarding
-        </Button>
 
         <div className={sgsStyles.line}>
           <Icon20RecentOutline className={textSecondary} />
