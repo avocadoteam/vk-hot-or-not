@@ -75,6 +75,12 @@ export const Slides = () => {
     }
   }, [profiles]);
 
+  useEffect(() => {
+    if (reportIds.includes(profileUserId)) {
+      manualSkip();
+    }
+  }, [reportIds]);
+
   const manualSkip = (rate?: boolean) => {
     api.start(index => {
       if (index !== currentIndex) return;
