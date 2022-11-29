@@ -4,6 +4,7 @@ import { sliderStyles } from '@ui/slider/slider.css';
 import Lottie from 'lottie-react';
 
 import { $profUI } from '@core/api/profile/store.prof';
+import { tapticImpact, tapticSelected } from '@core/vk-bridge/taptic';
 import { useStore } from 'effector-react';
 import { useRef } from 'react';
 import { homeStyles } from '../home.css';
@@ -21,12 +22,16 @@ export const SlideRate = ({ currentIndex }: Props) => {
     <div className={sliderStyles.slider}>
       <CoolSlider
         onChangeCb={v => {
+          tapticSelected();
           setTimerPlaying(false);
           setProfRating(v);
           moved.current = true;
         }}
         value={rating * 10}
-        onChangeCommitted={() => setTimerPlaying(true)}
+        onChangeCommitted={() => {
+          tapticImpact('medium');
+          setTimerPlaying(true);
+        }}
       />
       {currentIndex === 0 && !lastItemIds.length && rating === 5 && !moved.current ? (
         <Lottie animationData={swipeAnimation} loop className={homeStyles.swipeAnim} />

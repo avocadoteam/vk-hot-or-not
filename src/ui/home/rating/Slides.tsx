@@ -9,6 +9,7 @@ import {
 } from '@core/api/profile/effects.prof';
 import { $profiles, $profUI, loadingRate } from '@core/api/profile/store.prof';
 import { PublicProfile } from '@core/types/profile';
+import { tapticDone } from '@core/vk-bridge/taptic';
 import { animated, to as animate, useSprings } from '@react-spring/web';
 import { Modals } from '@ui/routes/structure';
 import { CountdownTimer } from '@ui/slider/Timer';
@@ -118,7 +119,7 @@ export const Slides = () => {
     }
     setTimerPlaying(false);
     setTimerCD(3000);
-
+    tapticDone('success');
     const wasItLast = pp.length - 1 === currentIndex;
     if (wasItLast) {
       setProfilesFinished();
@@ -188,6 +189,7 @@ export const Slides = () => {
           viewProfileFX(profile.vkUserId);
         }
       }
+      tapticDone('success');
       setTimerPlaying(false);
       setTimerCD(3000);
     }
