@@ -4,7 +4,7 @@ import { getSearchParams } from '@core/data/searchParams';
 import { AppearanceType, UserInfo } from '@vkontakte/vk-bridge';
 import { forward } from 'effector';
 import { appConfigDomain } from './domain';
-import { finishWelcomeFX, getStorageKeys, getUserDataFX } from './effects.config';
+import { finishWelcomeFX, getStorageKeys, getUserDataFX, setTapticVibration } from './effects.config';
 
 if (enableEffector) {
   import('effector-logger/attach').then(({ attachLogger }) => {
@@ -23,6 +23,7 @@ export type ConfigType = {
   secondVisit: boolean;
   hasFriends: boolean;
   skipFriends: boolean;
+  taptic: boolean;
 };
 
 export const setAppearance = appConfigDomain.createEvent<AppearanceType>();
@@ -41,6 +42,7 @@ export const $config = appConfigDomain.createStore<ConfigType>({
   secondVisit: false,
   hasFriends: !!getSearchParams().get('vk_access_token_settings')?.includes('friends'),
   skipFriends: false,
+  taptic: true,
 });
 
 $config
@@ -75,14 +77,20 @@ $config.on(getUserDataFX.doneData, (state, user) => ({
   ...state,
   user,
 }));
-$config.on(getStorageKeys.doneData, (state, { sawWelcome, secondVisit }) => ({
+$config.on(getStorageKeys.doneData, (state, { sawWelcome, secondVisit, taptic }) => ({
   ...state,
   sawWelcome,
   secondVisit,
+  taptic,
 }));
 $config.on(finishWelcomeFX.done, state => ({
   ...state,
   sawWelcome: true,
+}));
+
+$config.on(setTapticVibration.done, (state, { params }) => ({
+  ...state,
+  taptic: params === 'yes',
 }));
 
 forward({

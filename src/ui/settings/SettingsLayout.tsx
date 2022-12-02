@@ -1,6 +1,7 @@
 import { getProfileFX, saveProfileFX } from '@core/api/profile/effects.prof';
 import { $profile } from '@core/api/profile/store.prof';
 import { $config } from '@core/config';
+import { setTapticVibration } from '@core/config/effects.config';
 import { enableEffector } from '@core/constants';
 import { useProfileBtn } from '@core/hooks/useProfileBtn';
 import { useStoryShare } from '@core/hooks/useStoryShare';
@@ -14,7 +15,9 @@ import { btnSec, textSecondary } from '@ui/theme/theme.css';
 import { typography } from '@ui/theme/typography.css';
 import {
   Icon12EyeSlashOutline,
+  Icon16Done,
   Icon20AddCircleOutline,
+  Icon20Cancel,
   Icon20RecentOutline,
   Icon20RemoveCircleOutline,
   Icon20StarsFilled,
@@ -36,7 +39,7 @@ const loadingCombine = combine([saveProfileFX.pending, getProfileFX.pending], ([
 
 export const SettingsLayout = () => {
   const { info } = useStore($profile);
-  const { user } = useStore($config);
+  const { user, taptic } = useStore($config);
   const loadingVisib = useStore(loadingCombine);
 
   const { addBtnToProfile, addedToProfile, canAddToProfile, removeBtnFromProfile } = useProfileBtn();
@@ -166,6 +169,16 @@ export const SettingsLayout = () => {
             Добавить кнопку в профиль
           </Button>
         ) : null}
+
+        <Button
+          onClick={() => setTapticVibration(taptic ? 'no' : 'yes')}
+          size="l"
+          stretched
+          before={taptic ? <Icon20Cancel /> : <Icon16Done width={20} height={20} />}
+          className={btnSec}
+        >
+          {taptic ? 'Отключить вибрацию' : 'Включить вибрацию'}
+        </Button>
 
         <div className={sgsStyles.line}>
           <Icon20RecentOutline className={textSecondary} />

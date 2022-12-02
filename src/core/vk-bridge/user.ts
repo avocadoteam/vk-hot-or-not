@@ -34,6 +34,7 @@ export const getUserData = () =>
 export enum Skeys {
   Welcome = 'u_w',
   SecondVisit = 'u_s_v',
+  Taptic = 'u_t_v',
 }
 
 export const getUserToken = (scope: string) =>

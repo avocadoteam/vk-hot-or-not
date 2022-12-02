@@ -8,6 +8,7 @@ import {
   viewProfileFX,
 } from '@core/api/profile/effects.prof';
 import { $profiles, $profUI, loadingRate } from '@core/api/profile/store.prof';
+import { $config } from '@core/config';
 import { PublicProfile } from '@core/types/profile';
 import { tapticDone } from '@core/vk-bridge/taptic';
 import { animated, to as animate, useSprings } from '@react-spring/web';
@@ -46,6 +47,7 @@ const from = () => ({
 export const Slides = () => {
   const profiles = useStore($profiles);
   const { lastItemIds, rating, profileUserId, reportIds, isTimerPlaying } = useStore($profUI);
+  const { taptic } = useStore($config);
   const loading = useStore(loadingRate);
   const [gone] = useState(() => new Set());
   const [currentIndex, setIndex] = useState(0);
@@ -125,7 +127,7 @@ export const Slides = () => {
     }
     setTimerPlaying(false);
     setTimerCD(3000);
-    tapticDone('success');
+    taptic && tapticDone('success');
     const wasItLast = pp.length - 1 === currentIndex;
     if (wasItLast) {
       setProfilesFinished();
@@ -195,7 +197,7 @@ export const Slides = () => {
           viewProfileFX(profile.vkUserId);
         }
       }
-      tapticDone('success');
+      taptic && tapticDone('success');
       setTimerPlaying(false);
       setTimerCD(3000);
     }

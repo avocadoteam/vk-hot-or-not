@@ -106,7 +106,7 @@ $profile.on(getProfileFX.doneData, (state, info) => ({
 
 $profileHistory.on(getProfileHistoryFX.doneData, (state, ratings) => ({
   ...state,
-  ratings: state.ratings.concat(ratings),
+  ratings: Array.from(new Set([...state.ratings.concat(ratings)])),
   hasNextPage: !!ratings.length,
   offset: state.offset + 30,
 }));
