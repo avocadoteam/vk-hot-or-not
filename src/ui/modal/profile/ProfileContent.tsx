@@ -8,7 +8,9 @@ import {
   viewProfileFX,
 } from '@core/api/profile/effects.prof';
 import { $profUI, $publicProfile } from '@core/api/profile/store.prof';
+import { $config } from '@core/config';
 import { getSearchParams } from '@core/data/searchParams';
+import { tapticDone, tapticImpact, tapticSelected } from '@core/vk-bridge/taptic';
 import { homeStyles } from '@ui/home/home.css';
 import { CardContent } from '@ui/home/rating/CardContent';
 import swipeAnimation from '@ui/home/rating/swipe.json';
@@ -27,6 +29,7 @@ import { rEvents } from 'src/router/events';
 
 export const ProfileContent = () => {
   const { profileUserId, rating, reportIds } = useStore($profUI);
+  const { taptic } = useStore($config);
   const publicInfo = useStore($publicProfile);
   const loading = useStore(getPublicProfileFX.pending);
   const actionLoading = useStore(viewAndRateProfileFX.pending);
@@ -55,6 +58,7 @@ export const ProfileContent = () => {
                 profileId: publicInfo.profile!.vkUserId,
                 rating,
               }).then(() => {
+                taptic && tapticDone('success');
                 getPublicProfileFX(publicInfo.profile!.vkUserId);
               });
             }}
@@ -94,11 +98,15 @@ export const ProfileContent = () => {
           <div className={sliderStyles.slider}>
             <CoolSlider
               onChangeCb={v => {
+                taptic && tapticSelected();
                 setTimerPlaying(false);
                 setProfRating(v);
               }}
               value={rating * 10}
-              onChangeCommitted={() => setTimerPlaying(true)}
+              onChangeCommitted={() => {
+                taptic && tapticImpact('medium');
+                setTimerPlaying(true);
+              }}
             />
             {rating === 5 ? <Lottie animationData={swipeAnimation} loop className={homeStyles.swipeAnim} /> : null}
           </div>
@@ -109,6 +117,7 @@ export const ProfileContent = () => {
                 setTimerPlaying(false);
                 setTimerCD(3000);
                 viewProfileFX(publicInfo.profile!.vkUserId);
+                taptic && tapticDone('success');
                 setProfilesUserId(0);
                 rEvents.goBack();
                 rEvents.setModal(Modals.UserСlosedProfile);
