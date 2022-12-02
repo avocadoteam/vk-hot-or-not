@@ -40,13 +40,6 @@ export const ProfileContent = () => {
       <p className={typography({ variant: 'head', color: 'primary', align: 'center', m: 't3' })}>Профиль не существует</p>
     );
   }
-  if (publicInfo.profile.vkUserId === Number(getSearchParams().get('vk_user_id'))) {
-    return (
-      <p className={typography({ variant: 'head', color: 'primary', align: 'center', m: 't3' })}>
-        Свой профиль нельзя оценить
-      </p>
-    );
-  }
 
   return (
     <div className={homeStyles.container}>
@@ -69,7 +62,11 @@ export const ProfileContent = () => {
         </div>
       </div>
 
-      {publicInfo.rated ? (
+      {publicInfo.profile.vkUserId === Number(getSearchParams().get('vk_user_id')) ? (
+        <p className={typography({ variant: 'head', color: 'primary', align: 'center', m: 't3' })}>
+          Свой профиль нельзя оценить
+        </p>
+      ) : publicInfo.rated ? (
         <>
           <p className={typography({ color: 'primary', align: 'center', m: 't1.5' })}>Вы уже оценили этот профиль</p>
 
