@@ -16,9 +16,7 @@ export const getStorageKeys = appConfigDomain.createEffect(async () => {
   return {
     sawWelcome: data.keys.some(v => v.key === Skeys.Welcome && v.value === 'yes'),
     secondVisit: data.keys.some(v => v.key === Skeys.SecondVisit && v.value === 'yes'),
-    taptic: !data.keys.some(v => v.key === Skeys.Taptic)
-      ? true
-      : data.keys.some(v => v.key === Skeys.Taptic && v.value === 'yes'),
+    taptic: data.keys.some(v => v.key === Skeys.Taptic && v.value === 'yes'),
   };
 });
 
