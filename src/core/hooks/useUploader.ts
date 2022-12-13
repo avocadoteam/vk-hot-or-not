@@ -24,6 +24,7 @@ export const useUploader = ({
       'image/webp': [],
       'image/jpeg': [],
       'image/jpg': [],
+      'image/gif': [],
     },
     maxSize: oneMB * 10,
     disabled: loading,
