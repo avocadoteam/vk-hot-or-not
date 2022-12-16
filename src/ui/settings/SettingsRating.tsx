@@ -63,7 +63,7 @@ export const SettingsRating = () => {
             Пока никто не оценил Ваш профиль
           </p>
         )}
-        {data.length >= 100 ? (
+        {data.length >= 30 ? (
           <div style={{ padding: '0 1rem' }}>
             <Button
               onClick={() => rEvents.setPanel(MainPanels.AllRatings)}
