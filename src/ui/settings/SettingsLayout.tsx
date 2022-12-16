@@ -57,8 +57,8 @@ export const SettingsLayout = () => {
       await saveProfileFX({
         bgId: info.bgId,
         fileId: info.fileId,
-        firstName: user?.first_name ?? '',
-        lastName: user?.last_name ?? '',
+        firstName: info.firstName,
+        lastName: info.lastName,
         gender: user?.sex ?? 0,
         listType: newListType,
       });
@@ -99,9 +99,14 @@ export const SettingsLayout = () => {
           <img src={`https://showtime.app-dich.com${info?.fileUrl}`} crossOrigin="anonymous" className={sgsStyles.imgFg} />
         </div>
 
-        <p className={typography({ color: 'primary', variant: 'subHead', m: 't3', align: 'center' })}>
-          {user?.first_name} {user?.last_name}
-        </p>
+        <div className={sgsStyles.editName}>
+          <p className={typography({ color: 'primary', variant: 'subHead' })}>
+            {info?.firstName} {info?.lastName}
+          </p>
+          <IconButton hasHover={false} onClick={() => rEvents.setModal(Modals.SettingsName)}>
+            <Icon28EditOutline width={20} height={20} />
+          </IconButton>
+        </div>
         <p className={typography({ color: 'subhead', variant: 'body', m: 't.5', align: 'center', weight: 'medium' })}>
           Ваш профиль
         </p>

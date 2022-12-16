@@ -11,6 +11,8 @@ export enum HotListType {
 }
 
 export type ProfileData = {
+  firstName: string;
+  lastName: string;
   fileUrl: string;
   fileId: string;
   bgUrl: string;

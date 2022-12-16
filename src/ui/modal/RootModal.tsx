@@ -25,6 +25,7 @@ import { FileUploadContent } from './file-upload/FileUploadContent';
 import { ClosedProfileContent } from './profile/ClosedProfileContent';
 import { ProfileContent } from './profile/ProfileContent';
 import { ReportContent } from './report/ReportContent';
+import { SettingsName } from './settings-name/SettingsName';
 import { WelcomeContent } from './welcome/WelcomeContent';
 
 export const RootModal = () => {
@@ -123,6 +124,9 @@ export const RootModal = () => {
       </ModalCard>
       <ModalCard id={Modals.FileUpload} onClose={closeModal}>
         <FileUploadContent />
+      </ModalCard>
+      <ModalCard id={Modals.SettingsName} onClose={closeModal}>
+        <SettingsName />
       </ModalCard>
 
       <ModalPage

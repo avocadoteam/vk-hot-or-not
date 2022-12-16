@@ -36,4 +36,5 @@ export enum Modals {
   FileUpload = 'fileupload',
   UserProfile = 'userprofile',
   UserСlosedProfile = 'userclosedprofile',
+  SettingsName = 'settingsname'
 }

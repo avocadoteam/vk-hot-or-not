@@ -14,6 +14,7 @@ export enum ToastId {
   StoryShare = 'story-share',
   Notifications = 'notifications',
   Visibility = 'visibility',
+  Settings = 'settings',
 }
 export type Form = 'location';
 export type ToastsState = {

@@ -127,6 +127,20 @@ globalStyle(`${line} > p`, {
   marginLeft: '.5rem',
 });
 
+const editName = style({
+  display: 'flex',
+  alignItems: 'center',
+  marginTop: '2.5rem',
+  justifyContent: 'center',
+  width: '100%',
+});
+
+globalStyle(`${editName} > button`, {
+  marginLeft: '1rem',
+  width: '24px',
+  height: '24px',
+});
+
 export const sgsStyles = {
   container,
   imgsWrap,
@@ -142,4 +156,5 @@ export const sgsStyles = {
   dFlex,
   line,
   rating,
+  editName,
 };
