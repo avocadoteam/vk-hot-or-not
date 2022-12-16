@@ -1,11 +1,9 @@
 import { ProfileData, PublicInfo, PublicProfile } from '@core/types/profile';
-import { Rating } from '@core/types/rating';
 import { combine, forward } from 'effector';
 import { getUserFriendsFX } from '../friends/effects.config';
 import { profD } from './domain.prof';
 import {
   getProfileFX,
-  getProfileHistoryFX,
   getPublicProfileFX,
   getPublicProfilesFX,
   removeDelayFX,
@@ -45,15 +43,6 @@ export const $publicProfile = profD.createStore<PublicInfo>({
   rated: null,
 });
 export const $profiles = profD.createStore<PublicProfile[]>([]);
-export const $profileHistory = profD.createStore<{
-  ratings: Rating[];
-  hasNextPage: boolean;
-  offset: number;
-}>({
-  ratings: [],
-  offset: 0,
-  hasNextPage: true,
-});
 
 export const $profUI = profD.createStore<ProfUIState>({
   lastItemIds: [],
@@ -102,13 +91,6 @@ $profUI.on(sendReportFX.done, state => ({
 $profile.on(getProfileFX.doneData, (state, info) => ({
   ...state,
   info,
-}));
-
-$profileHistory.on(getProfileHistoryFX.doneData, (state, ratings) => ({
-  ...state,
-  ratings: Array.from(new Set([...state.ratings.concat(ratings)])),
-  hasNextPage: !!ratings.length,
-  offset: state.offset + 30,
 }));
 
 forward({

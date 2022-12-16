@@ -1,5 +1,4 @@
 import { BaseResponse } from './common';
-import { Rating } from './rating';
 
 export enum HotViewType {
   Anon = 1,
@@ -20,7 +19,6 @@ export type ProfileData = {
   listType: HotListType;
   ban: Date | null;
   delay: Date | null;
-  ratings: Rating[];
   ratingMean: number;
   topRatings: number;
   ratingsCount: number;

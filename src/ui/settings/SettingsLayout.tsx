@@ -2,23 +2,20 @@ import { getProfileFX, saveProfileFX } from '@core/api/profile/effects.prof';
 import { $profile } from '@core/api/profile/store.prof';
 import { $config } from '@core/config';
 import { setTapticVibration } from '@core/config/effects.config';
-import { enableEffector } from '@core/constants';
+import { isDev } from '@core/constants';
 import { useProfileBtn } from '@core/hooks/useProfileBtn';
 import { useStoryShare } from '@core/hooks/useStoryShare';
 import { HotListType } from '@core/types/profile';
 import { addToastToQueue, hideToast } from '@core/ui-config/effects.uic';
 import { ToastId } from '@core/ui-config/types';
-import { openLink } from '@core/utils';
-import { MainPanels, Modals } from '@ui/routes/structure';
-import { valueToImgPath } from '@ui/slider/CoolSlider';
-import { btnSec, textSecondary } from '@ui/theme/theme.css';
+import { Modals } from '@ui/routes/structure';
+import { btnSec, mthalf } from '@ui/theme/theme.css';
 import { typography } from '@ui/theme/typography.css';
 import {
   Icon12EyeSlashOutline,
   Icon16Done,
   Icon20AddCircleOutline,
   Icon20Cancel,
-  Icon20RecentOutline,
   Icon20RemoveCircleOutline,
   Icon20StarsFilled,
   Icon20StoryOutline,
@@ -26,13 +23,14 @@ import {
   Icon28EditOutline,
   Icon28ViewOutline,
 } from '@vkontakte/icons';
-import { Avatar, Button, IconButton, Separator, SimpleCell, Spacing, Spinner } from '@vkontakte/vkui';
+import { Button, IconButton, Separator, Spacing, Spinner } from '@vkontakte/vkui';
 import { combine } from 'effector';
 import { useStore } from 'effector-react';
 import { useCallback } from 'react';
 import { Indicator } from 'src/assets/svg/Indicator';
 import { Rate } from 'src/assets/svg/Rate';
 import { rEvents } from 'src/router/events';
+import { SettingsRating } from './SettingsRating';
 import { sgsStyles } from './sgs.css';
 
 const loadingCombine = combine([saveProfileFX.pending, getProfileFX.pending], ([a, b]) => a || b);
@@ -44,10 +42,9 @@ export const SettingsLayout = () => {
 
   const { addBtnToProfile, addedToProfile, canAddToProfile, removeBtnFromProfile } = useProfileBtn();
 
-  const rateds = info?.ratings ?? [];
   const pp = Math.trunc((info?.ratingMean ?? 10) * 10);
   const ppPosition = pp > 90 ? pp - 10 : pp > 10 ? pp - 5 : pp;
-  const { shareStory, clicked } = useStoryShare(user?.id ?? 0, rateds.length ? pp : 100);
+  const { shareStory, clicked } = useStoryShare(user?.id ?? 0, pp);
 
   const changeVisib = useCallback(async () => {
     if (!info) return;
@@ -150,11 +147,9 @@ export const SettingsLayout = () => {
         <p className={typography({ color: 'subhead', variant: 'tertiary', weight: 'medium', self: 'left' })}>Ваш счёт</p>
 
         <div className={sgsStyles.slider}>
-          <div className={sgsStyles.idicator} style={{ left: rateds.length ? `${ppPosition}%` : '90%' }}>
+          <div className={sgsStyles.idicator} style={{ left: `${ppPosition}%` }}>
             <Indicator />
-            <p className={typography({ color: 'red', variant: 'body', align: 'center' })}>
-              {rateds.length ? `${pp}%` : '100%'}
-            </p>
+            <p className={typography({ color: 'red', variant: 'body', align: 'center' })}>{`${pp}%`}</p>
           </div>
         </div>
 
@@ -163,7 +158,7 @@ export const SettingsLayout = () => {
             Поделиться счётом
           </Button>
         </div>
-        {canAddToProfile && enableEffector ? (
+        {canAddToProfile && isDev ? (
           <Button
             onClick={addedToProfile ? removeBtnFromProfile : addBtnToProfile}
             size="l"
@@ -180,47 +175,12 @@ export const SettingsLayout = () => {
           size="l"
           stretched
           before={taptic ? <Icon20Cancel /> : <Icon16Done width={20} height={20} />}
-          className={btnSec}
+          className={`${btnSec} ${mthalf}`}
         >
           {taptic ? 'Отключить вибрацию' : 'Включить вибрацию'}
         </Button>
-
-        <div className={sgsStyles.line}>
-          <Icon20RecentOutline className={textSecondary} />
-          <p className={typography({ color: 'subhead', variant: 'tertiary', weight: 'medium' })}>Последние оценки</p>
-        </div>
       </div>
-      <div style={{ width: '100%', paddingBottom: '1rem' }}>
-        {rateds.length ? (
-          rateds.map(r => (
-            <SimpleCell
-              key={r.id}
-              before={<Avatar size={40} src={r.ava} />}
-              onClick={() => openLink(`https://vk.ru/id${r.vkUserId}`)}
-              indicator={<img width={24} height={24} src={valueToImgPath(r.rating ?? 5)} className={sgsStyles.rating} />}
-            >
-              <p className={typography({ color: 'primary', variant: 'caption' })}>{r.name}</p>
-            </SimpleCell>
-          ))
-        ) : (
-          <p className={typography({ color: 'tertiary', variant: 'caption', align: 'center' })}>
-            Пока никто не оценил Ваш профиль
-          </p>
-        )}
-        {rateds.length >= 30 ? (
-          <div style={{ padding: '0 1rem' }}>
-            <Button
-              onClick={() => rEvents.setPanel(MainPanels.AllRatings)}
-              size="l"
-              stretched
-              className={btnSec}
-              style={{ margin: '1rem 0' }}
-            >
-              Остальной рейтинг
-            </Button>
-          </div>
-        ) : null}
-      </div>
+      <SettingsRating />
     </>
   );
 };

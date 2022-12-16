@@ -2,15 +2,10 @@ import { AX } from '@core/data/fetcher';
 import { qVK } from '@core/data/q-params';
 import { BaseResponse } from '@core/types/common';
 import { CreateProfile, ProfileResponse, PublicInfo, PublicProfile, ReportReason, SaveProfile } from '@core/types/profile';
-import { Rating } from '@core/types/rating';
 import { profD } from './domain.prof';
 
 export const getProfileFX = profD.createEffect(async () => {
   const { data } = await AX.get<ProfileResponse>(`/hot-or-not/profile${qVK}`);
-  return data.data;
-});
-export const getProfileHistoryFX = profD.createEffect(async (offset: number) => {
-  const { data } = await AX.get<BaseResponse<Rating[]>>(`/hot-or-not/profile/history${qVK}&offset=${offset}`);
   return data.data;
 });
 

@@ -1,5 +1,5 @@
-import { getProfileHistoryFX } from '@core/api/profile/effects.prof';
-import { $profileHistory } from '@core/api/profile/store.prof';
+import { getProfileHistoryFX } from '@core/api/rating/effects.rating';
+import { $profileHistory, $ratingSort } from '@core/api/rating/store.rating';
 import { openLink } from '@core/utils';
 import { sgsStyles } from '@ui/settings/sgs.css';
 import { valueToImgPath } from '@ui/slider/CoolSlider';
@@ -15,6 +15,7 @@ import { NoResults } from './NoResults';
 
 export const AllRatingsLayout = () => {
   const { hasNextPage, offset, ratings } = useStore($profileHistory);
+  const { orderByRate, sex } = useStore($ratingSort);
   const isNextPageLoading = useStore(getProfileHistoryFX.pending);
 
   useEffect(() => {
@@ -23,8 +24,8 @@ export const AllRatingsLayout = () => {
 
   const loadMoreItems = useCallback(() => {
     if (isNextPageLoading || !hasNextPage) return;
-    getProfileHistoryFX(offset);
-  }, [isNextPageLoading, hasNextPage, offset]);
+    getProfileHistoryFX({ offset, sex, orderBy: orderByRate });
+  }, [isNextPageLoading, hasNextPage, offset, orderByRate, sex]);
 
   const itemCount = hasNextPage ? ratings.length + 1 : ratings.length;
 

@@ -145,6 +145,9 @@ export const mt2 = style({
 export const mthalf = style({
   marginTop: '.5rem !important',
 });
+export const mt = style({
+  marginTop: '1rem !important',
+});
 
 export const btnSec = style({
   backgroundColor: `${vars.all.btnSecondary} !important`,

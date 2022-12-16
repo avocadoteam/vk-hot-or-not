@@ -1,4 +1,4 @@
-import { saveProfileFX } from '@core/api/profile/effects.prof';
+import { getProfileFX, saveProfileFX } from '@core/api/profile/effects.prof';
 import { $profile } from '@core/api/profile/store.prof';
 import { $config } from '@core/config';
 import { addToastToQueue } from '@core/ui-config/effects.uic';
@@ -6,15 +6,19 @@ import { ToastId } from '@core/ui-config/types';
 import { mt2 } from '@ui/theme/theme.css';
 import { Icon20Cancel } from '@vkontakte/icons';
 import { ANDROID, Button, FormItem, FormLayout, IconButton, Input, IOS, usePlatform } from '@vkontakte/vkui';
+import { combine } from 'effector';
 import { useStore } from 'effector-react';
 import { ChangeEvent, FormEvent, useCallback, useState } from 'react';
 import { rEvents } from 'src/router/events';
 import { fileStyles } from '../file-upload/file.css';
 import { repStyles } from '../report/rep.css';
 
+const loadingCombine = combine([saveProfileFX.pending, getProfileFX.pending], ([a, b]) => a || b);
+
 export const SettingsName = () => {
   const { info } = useStore($profile);
   const { user } = useStore($config);
+  const loading = useStore(loadingCombine);
 
   const platform = usePlatform();
   const [data, setData] = useState({
@@ -87,7 +91,7 @@ export const SettingsName = () => {
             <Input type="text" name="lastName" value={data.lastName} maxLength={64} onChange={changeValue} />
           </FormItem>
           <FormItem style={{ padding: '0' }}>
-            <Button size="l" stretched type="submit">
+            <Button size="l" stretched type="submit" loading={loading} disabled={loading}>
               Обновить
             </Button>
           </FormItem>

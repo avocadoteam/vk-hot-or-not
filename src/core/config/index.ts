@@ -1,12 +1,12 @@
 import { getUserFriendsFX } from '@core/api/friends/effects.config';
-import { enableEffector } from '@core/constants';
+import { isDev } from '@core/constants';
 import { getSearchParams } from '@core/data/searchParams';
 import { AppearanceType, UserInfo } from '@vkontakte/vk-bridge';
 import { forward } from 'effector';
 import { appConfigDomain } from './domain';
 import { finishWelcomeFX, getStorageKeys, getUserDataFX, setTapticVibration } from './effects.config';
 
-if (enableEffector) {
+if (isDev) {
   import('effector-logger/attach').then(({ attachLogger }) => {
     attachLogger(appConfigDomain, {
       console: 'enabled',

@@ -1,5 +1,6 @@
 import { vars } from '@ui/theme/theme.css';
 import { globalStyle, style } from '@vanilla-extract/css';
+import { recipe } from '@vanilla-extract/recipes';
 
 const container = style({
   display: 'flex',
@@ -112,11 +113,23 @@ export const dFlex = style({
   width: '100%',
   margin: '3rem 0 .5rem',
 });
-export const line = style({
-  display: 'flex',
-  alignItems: 'center',
-  width: '100%',
-  margin: '1rem 0',
+export const line = recipe({
+  base: {
+    display: 'flex',
+    alignItems: 'center',
+    width: '100%',
+  },
+  variants: {
+    m: {
+      top: {
+        marginTop: '1rem',
+      },
+      y: {
+        margin: '1rem 0',
+        flexDirection: 'column',
+      },
+    },
+  },
 });
 export const rating = style({
   display: 'flex',

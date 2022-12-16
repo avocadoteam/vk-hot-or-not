@@ -1,4 +1,4 @@
-import { getProfileHistoryFX } from '@core/api/profile/effects.prof';
+import { getProfileHistoryFX } from '@core/api/rating/effects.rating';
 import { Div, Group, Title } from '@vkontakte/vkui';
 import { useStore } from 'effector-react';
 import { memo } from 'react';
