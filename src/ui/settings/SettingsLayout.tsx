@@ -2,7 +2,6 @@ import { getProfileFX, saveProfileFX } from '@core/api/profile/effects.prof';
 import { $profile } from '@core/api/profile/store.prof';
 import { $config } from '@core/config';
 import { setTapticVibration } from '@core/config/effects.config';
-import { isDev } from '@core/constants';
 import { useProfileBtn } from '@core/hooks/useProfileBtn';
 import { useStoryShare } from '@core/hooks/useStoryShare';
 import { HotListType } from '@core/types/profile';
@@ -158,7 +157,7 @@ export const SettingsLayout = () => {
             Поделиться счётом
           </Button>
         </div>
-        {canAddToProfile && isDev ? (
+        {canAddToProfile ? (
           <Button
             onClick={addedToProfile ? removeBtnFromProfile : addBtnToProfile}
             size="l"
@@ -166,7 +165,7 @@ export const SettingsLayout = () => {
             before={addedToProfile ? <Icon20RemoveCircleOutline /> : <Icon20AddCircleOutline />}
             className={btnSec}
           >
-            Добавить кнопку в профиль
+            {addedToProfile ? 'Убрать кнопку из профиля' : 'Добавить кнопку в профиль'}
           </Button>
         ) : null}
 
