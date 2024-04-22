@@ -4,7 +4,7 @@
   "homepage": "./",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build --base=/vk-hot-or-not/",
+    "build": "tsc && vite build",
     "build:odr": "pnpm build && pnpm zip",
     "zip": "ts-node auto-zip/index.ts",
     "preview": "vite preview"
