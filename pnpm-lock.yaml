@@ -94,8 +94,8 @@ importers:
         version: 7.8.0
     devDependencies:
       '@types/node':
-        specifier: ^18.11.15
-        version: 18.11.15
+        specifier: ^20.12.7
+        version: 20.12.7
       '@types/react':
         specifier: ^18.0.26
         version: 18.0.26
@@ -113,10 +113,10 @@ importers:
         version: 1.0.6
       '@vanilla-extract/vite-plugin':
         specifier: ^4.0.7
-        version: 4.0.7(@types/node@18.11.15)(terser@5.15.0)(vite@5.2.10(@types/node@18.11.15)(terser@5.15.0))
+        version: 4.0.7(@types/node@20.12.7)(terser@5.15.0)(vite@5.2.10(@types/node@20.12.7)(terser@5.15.0))
       '@vitejs/plugin-react-swc':
         specifier: ^3.6.0
-        version: 3.6.0(vite@5.2.10(@types/node@18.11.15)(terser@5.15.0))
+        version: 3.6.0(vite@5.2.10(@types/node@20.12.7)(terser@5.15.0))
       effector-logger:
         specifier: ^0.13.4
         version: 0.13.4(effector@22.4.1)
@@ -125,16 +125,16 @@ importers:
         version: 2.8.1
       ts-node:
         specifier: ^10.9.1
-        version: 10.9.1(@swc/core@1.4.17)(@types/node@18.11.15)(typescript@4.9.4)
+        version: 10.9.1(@swc/core@1.4.17)(@types/node@20.12.7)(typescript@4.9.4)
       typescript:
         specifier: ^4.9.4
         version: 4.9.4
       vite:
         specifier: ^5.2.10
-        version: 5.2.10(@types/node@18.11.15)(terser@5.15.0)
+        version: 5.2.10(@types/node@20.12.7)(terser@5.15.0)
       vite-plugin-singlefile:
         specifier: ^2.0.1
-        version: 2.0.1(rollup@4.16.4)(vite@5.2.10(@types/node@18.11.15)(terser@5.15.0))
+        version: 2.0.1(rollup@4.16.4)(vite@5.2.10(@types/node@20.12.7)(terser@5.15.0))
       zip-local:
         specifier: ^0.3.5
         version: 0.3.5
@@ -1041,6 +1041,9 @@ packages:
 
   '@types/node@18.11.15':
     resolution: {integrity: sha512-VkhBbVo2+2oozlkdHXLrb3zjsRkpdnaU2bXmX8Wgle3PUi569eLRaHGlgETQHR7lLL1w7GiG3h9SnePhxNDecw==}
+
+  '@types/node@20.12.7':
+    resolution: {integrity: sha512-wq0cICSkRLVaf3UGLMGItu/PtdY7oaXaI/RVU+xliKVOtRna3PRY57ZDfztpDL0n11vfymMUnXv8QwYCO7L1wg==}
 
   '@types/parse-json@4.0.0':
     resolution: {integrity: sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==}
@@ -2518,6 +2521,9 @@ packages:
   ufo@1.5.3:
     resolution: {integrity: sha512-Y7HYmWaFwPUmkoQCUIAYpKqkOf+SbVj/2fJJZ4RJMCfZp0rTGwRbzQD+HghfnhKOjL9E01okqz+ncJskGYfBNw==}
 
+  undici-types@5.26.5:
+    resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
+
   union-value@1.0.1:
     resolution: {integrity: sha512-tJfXmxMeWYnczCVs7XAEvIV7ieppALdyepWMkHkwciRpZraG/xwT+s2JN8+pr1+8jCRf80FFzvr+MpQeeoF4Xg==}
     engines: {node: '>=0.10.0'}
@@ -3464,6 +3470,10 @@ snapshots:
 
   '@types/node@18.11.15': {}
 
+  '@types/node@20.12.7':
+    dependencies:
+      undici-types: 5.26.5
+
   '@types/parse-json@4.0.0': {}
 
   '@types/prop-types@15.7.5': {}
@@ -3528,7 +3538,7 @@ snapshots:
       modern-ahocorasick: 1.0.1
       outdent: 0.8.0
 
-  '@vanilla-extract/integration@7.1.2(@types/node@18.11.15)(terser@5.15.0)':
+  '@vanilla-extract/integration@7.1.2(@types/node@20.12.7)(terser@5.15.0)':
     dependencies:
       '@babel/core': 7.24.4
       '@babel/plugin-syntax-typescript': 7.24.1(@babel/core@7.24.4)
@@ -3541,8 +3551,8 @@ snapshots:
       lodash: 4.17.21
       mlly: 1.6.1
       outdent: 0.8.0
-      vite: 5.2.10(@types/node@18.11.15)(terser@5.15.0)
-      vite-node: 1.5.0(@types/node@18.11.15)(terser@5.15.0)
+      vite: 5.2.10(@types/node@20.12.7)(terser@5.15.0)
+      vite-node: 1.5.0(@types/node@20.12.7)(terser@5.15.0)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -3559,10 +3569,10 @@ snapshots:
     dependencies:
       '@vanilla-extract/css': 1.14.2
 
-  '@vanilla-extract/vite-plugin@4.0.7(@types/node@18.11.15)(terser@5.15.0)(vite@5.2.10(@types/node@18.11.15)(terser@5.15.0))':
+  '@vanilla-extract/vite-plugin@4.0.7(@types/node@20.12.7)(terser@5.15.0)(vite@5.2.10(@types/node@20.12.7)(terser@5.15.0))':
     dependencies:
-      '@vanilla-extract/integration': 7.1.2(@types/node@18.11.15)(terser@5.15.0)
-      vite: 5.2.10(@types/node@18.11.15)(terser@5.15.0)
+      '@vanilla-extract/integration': 7.1.2(@types/node@20.12.7)(terser@5.15.0)
+      vite: 5.2.10(@types/node@20.12.7)(terser@5.15.0)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -3573,10 +3583,10 @@ snapshots:
       - supports-color
       - terser
 
-  '@vitejs/plugin-react-swc@3.6.0(vite@5.2.10(@types/node@18.11.15)(terser@5.15.0))':
+  '@vitejs/plugin-react-swc@3.6.0(vite@5.2.10(@types/node@20.12.7)(terser@5.15.0))':
     dependencies:
       '@swc/core': 1.4.17
-      vite: 5.2.10(@types/node@18.11.15)(terser@5.15.0)
+      vite: 5.2.10(@types/node@20.12.7)(terser@5.15.0)
     transitivePeerDependencies:
       - '@swc/helpers'
 
@@ -5038,14 +5048,14 @@ snapshots:
 
   traverse@0.6.6: {}
 
-  ts-node@10.9.1(@swc/core@1.4.17)(@types/node@18.11.15)(typescript@4.9.4):
+  ts-node@10.9.1(@swc/core@1.4.17)(@types/node@20.12.7)(typescript@4.9.4):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.9
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.3
-      '@types/node': 18.11.15
+      '@types/node': 20.12.7
       acorn: 8.8.0
       acorn-walk: 8.2.0
       arg: 4.1.3
@@ -5069,6 +5079,8 @@ snapshots:
   typescript@4.9.4: {}
 
   ufo@1.5.3: {}
+
+  undici-types@5.26.5: {}
 
   union-value@1.0.1:
     dependencies:
@@ -5112,13 +5124,13 @@ snapshots:
 
   v8-compile-cache-lib@3.0.1: {}
 
-  vite-node@1.5.0(@types/node@18.11.15)(terser@5.15.0):
+  vite-node@1.5.0(@types/node@20.12.7)(terser@5.15.0):
     dependencies:
       cac: 6.7.14
       debug: 4.3.4
       pathe: 1.1.2
       picocolors: 1.0.0
-      vite: 5.2.10(@types/node@18.11.15)(terser@5.15.0)
+      vite: 5.2.10(@types/node@20.12.7)(terser@5.15.0)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -5129,19 +5141,19 @@ snapshots:
       - supports-color
       - terser
 
-  vite-plugin-singlefile@2.0.1(rollup@4.16.4)(vite@5.2.10(@types/node@18.11.15)(terser@5.15.0)):
+  vite-plugin-singlefile@2.0.1(rollup@4.16.4)(vite@5.2.10(@types/node@20.12.7)(terser@5.15.0)):
     dependencies:
       micromatch: 4.0.5
       rollup: 4.16.4
-      vite: 5.2.10(@types/node@18.11.15)(terser@5.15.0)
+      vite: 5.2.10(@types/node@20.12.7)(terser@5.15.0)
 
-  vite@5.2.10(@types/node@18.11.15)(terser@5.15.0):
+  vite@5.2.10(@types/node@20.12.7)(terser@5.15.0):
     dependencies:
       esbuild: 0.20.2
       postcss: 8.4.38
       rollup: 4.16.4
     optionalDependencies:
-      '@types/node': 18.11.15
+      '@types/node': 20.12.7
       fsevents: 2.3.3
       terser: 5.15.0
 
