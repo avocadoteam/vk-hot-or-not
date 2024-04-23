@@ -2,10 +2,11 @@
   "name": "vk-hot-or-not",
   "version": "1.0.0",
   "homepage": "./",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "build:odr": "pnpm build && pnpm zip",
+    "build:odr": "tsc && vite build --mode staging",
     "zip": "ts-node auto-zip/index.ts",
     "preview": "vite preview"
   },
@@ -17,9 +18,8 @@
     "@react-spring/web": "^9.6.0",
     "@sentry/browser": "^7.26.0",
     "@use-gesture/react": "^10.2.23",
-    "@vanilla-extract/css": "^1.9.2",
-    "@vanilla-extract/recipes": "^0.3.0",
-    "@vanilla-extract/vite-plugin": "^3.7.0",
+    "@vanilla-extract/css": "^1.14.2",
+    "@vanilla-extract/recipes": "^0.5.2",
     "@vkontakte/icons": "^2.1.1",
     "@vkontakte/vk-bridge": "^2.7.2",
     "@vkontakte/vk-miniapps-deploy": "^0.0.26",
@@ -47,13 +47,14 @@
     "@types/react-virtualized-auto-sizer": "^1.0.1",
     "@types/react-window": "^1.8.5",
     "@types/react-window-infinite-loader": "^1.0.6",
-    "@vitejs/plugin-react": "^3.0.0",
+    "@vanilla-extract/vite-plugin": "^4.0.7",
+    "@vitejs/plugin-react-swc": "^3.6.0",
     "effector-logger": "^0.13.4",
     "prettier": "^2.8.1",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.4",
-    "vite": "^4.0.1",
-    "vite-plugin-pwa": "^0.14.0",
+    "vite": "^5.2.10",
+    "vite-plugin-singlefile": "^2.0.1",
     "zip-local": "^0.3.5"
   }
 }
